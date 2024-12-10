@@ -1,26 +1,54 @@
-#Vai receber uma pilha de caixas empilhadas, e cada caixa vai armazenar o valor de quantos pacotes estão contidas na caixa.
+#Crio uma classe de caixas: Com variaveis pacotes e paridade(para indicar se é par ou ímpar), e ponteiro para a próxima caixa da pilha.
+class caixa ():
+    prox = None
+    pacotes = 0
+    paridade = ""
+    def __init__(self,pacotes):
+        self.pacotes = pacotes
+        self.proxCaixa = None
+        if self.pacotes % 2 == 0:
+            self.paridade = "Pár"
+        else:
+            self.paridade = "Ímpar"
 
-# Devemos analisar a paridade entre o novo elemento e o que vem antes dele e caso eles tenham a mesma paridade ambas devem ser substituida por uma nova caixa
-# Que agora tem a quantidade de pacotes igual a diferença entre os pacotes da caixa anterior e da caixa nova. (qtds_pacotes_novo - qtd_pacotes_anterior)
 
-
-#Criando a classe que vai representar cada caixa definindo como atributos: Quantidade de pacotes na caixa e o direcionamento para a caixa que vem abaixo dela
-class caixa:
-    qtd_pacotes = 0
-    caixa_anterior = None
-
-    def _init_ (self, qtd_pacotes):
-        self.caixa_anterior = None
-        self.qtd_pacotes = qtd_pacotes
-    
-#Criar a classe pilha com as funções de atualizarpilha para conseguir subtrair a qtd de pacotes da caixa do topo com a que vem logo em seguida.
-#E essa atualização deve ocorrer enquanto a paridade entre o primeiro item e o seguinte sejam iguais.
-class pilha:
+#Crio uma classe de pilha com as seguintes caracteristicas: header, top e size
+class pilha (): 
+    header = caixa()
     top = None
-    size = 0
+    size = 0  
+    
 
-#Na função de atualizar a pilha eu devo criar a lógica para subtrair os valores dos dois ultimos itens da pilha e atualizar o header da pilha para dar continuidade de forma recursiva
-    def atualizarlista():
+    #Função de inserir, que para inserir uma nova caixa nessa pilha, atualiza alguns elementos:    
+    def inserir(self, elemento):
+
+        #Se for o primeiro item a ser inserido, o topo da pilha vai ser o elemento(caixa) a ser inserido.
+        #   O ponteiro de proximo do topo da pilha vai receber o header dessa pilha e aumento 1 no tamanho da pilha
+        if self.top == None:
+            self.top = elemento
+            self.top.prox = self.header
+            self.size += 1
+            return  
+        
+        #Senão, o ponteiro proximo do elemento a ser inserido vai receber o topo da pilha. O topo da lista vai ser a caixa a ser inserida e  o tamanho aumenta.
+        else:
+            elemento.prox = self.top
+            self.top = elemento
+            self.size += 1
+            return
+        
+    #Pra remover {TEM QUE SER O ITEM DO TOPO!!!}: elemento é o topo da lista. Atualizo o topo para a caixa que é o prox do elemento a ser deletado: (top.prox)
+    def pop (self):
+        elemento = self.top
+        self.top = self.top.prox
+
+        #Se o elemento a ser excluido for o unico, então atualizo o top da pilha para None
+        if self.top == self.header:
+            self.top = None
+        return elemento
+    
+#Devo criar uma função para atualizar a pilha ?
+    def atualizarPilha():
         #caso a paridade seja igual
         if ((caixa_anterior % 2) == 0 and (caixa_atual % 2) == 0) or (caixa_anterior % 2) != 0 and (caixa_atual % 2) != 0:
             caixa_atual.qtd_pacotes = caixaAtual.qtd_pacotes - caixaAnterior.qtd_pacotes #Lembrar de transformar em positivo, independente do resultado.

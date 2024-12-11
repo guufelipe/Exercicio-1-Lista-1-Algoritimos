@@ -30,14 +30,23 @@ class pilha ():
             self.size += 1
             return  
         
-        #Senão, o ponteiro proximo do elemento a ser inserido vai receber o topo da pilha. O topo da lista vai ser a caixa a ser inserida e  o tamanho aumenta.
+        #Senão, o ponteiro proximo do elemento a ser inserido vai receber o topo da pilha. O topo da pilha vai ser a caixa a ser inserida e 
+        # o tamanho aumenta.
         else:
-            elemento.prox = self.top
-            self.top = elemento
-            self.size += 1
-            return
+            #Quando a paridade forem iguais eu crio um novo objeto com os valores atualizados e o coloco no topo da lista substituindo o
+            #  anterior.
+            if elemento.paridade == self.top.paridade:
+                novaCaixa = ((elemento.pacotes - self.top.pacotes))
+                novaCaixa.prox = self.top.prox
+                self.top = novaCaixa
+            else:
+                elemento.prox = self.top
+                self.top = elemento
+                self.size += 1
+                return
         
-    #Pra remover {TEM QUE SER O ITEM DO TOPO!!!}: elemento é o topo da lista. Atualizo o topo para a caixa que é o prox do elemento a ser deletado: (top.prox)
+    #Pra remover {TEM QUE SER O ITEM DO TOPO!!!}: elemento é o topo da lista. Atualizo o topo para a caixa que é o prox do elemento a ser
+    #  deletado: (top.prox)
     def pop (self):
         elemento = self.top
         self.top = self.top.prox
@@ -47,19 +56,6 @@ class pilha ():
             self.top = None
         return elemento
     
-#Devo criar uma função para atualizar a pilha ?
-    def atualizarPilha():
-        #caso a paridade seja igual
-        if ((caixa_anterior % 2) == 0 and (caixa_atual % 2) == 0) or (caixa_anterior % 2) != 0 and (caixa_atual % 2) != 0:
-            caixa_atual.qtd_pacotes = caixaAtual.qtd_pacotes - caixaAnterior.qtd_pacotes #Lembrar de transformar em positivo, independente do resultado.
-            #deletar a caixa anterior da pilha e adiciona caixa atual no topo 
-            header = caixa_atual.qtd_pacotes
-
-    
 
 # no main eu devo pegar os inputs que especificam quantas pilhas serão processadas
-#e as pilhas que virão sempre depois de uma linha vazia.
-
-#fazer a recursao em cada pilha e entregar o re
-
-
+#e as pilhas que virão sempre depois de uma linha vazia. Transformar em objetos e adicionar esses objetos na minha pilha

@@ -18,7 +18,6 @@ class pilha ():
     top = None
     size = 0  
     
-
     #Função de inserir, que para inserir uma nova caixa nessa pilha, atualiza alguns elementos:    
     def inserir(self, elemento):
 
@@ -57,5 +56,21 @@ class pilha ():
         return elemento
     
 
-# no main eu devo pegar os inputs que especificam quantas pilhas serão processadas
-#e as pilhas que virão sempre depois de uma linha vazia. Transformar em objetos e adicionar esses objetos na minha pilha
+def main():
+
+    t = int(input())
+    for i in range(0, t):
+        pilha = pilha()
+        pacotes = -1
+
+
+        while (pacotes != 0):
+            pacotes = int(input())
+            caixa = caixa(pacotes)
+            #caixa.pacotes = pacotes
+            pilha.inserir(caixa)
+
+
+main()
+
+
